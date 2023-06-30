@@ -78,7 +78,7 @@ const SignUpScreen = () => {
         <TouchableOpacity
           className="bg-[#eeca70] h-14 w-full items-center absolute bottom-10 left-6  justify-center rounded-md" 
           onPress={()=> navigation.navigate("SignUp")}>
-            <Text className="font-bold text-slate-700 text-lg">Sign Up</Text>
+            <Text className="font-bold text-white text-lg">Sign Up</Text>
         </TouchableOpacity>
         <View className="flex flex-row items-center justify-center">
           <Text>Already have an account?</Text>
