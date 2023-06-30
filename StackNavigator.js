@@ -7,7 +7,9 @@ import Welcome from "./screens/Welcome"
 const StackNavigator = () => {
     const Stack = createStackNavigator()
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{
+      headerShown: false
+    }}>
         <Stack.Screen name="Welcome" component={Welcome} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="SignIn" component={SignInScreen} />
