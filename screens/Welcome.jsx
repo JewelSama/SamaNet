@@ -24,16 +24,16 @@ const Welcome = () => {
           </View>
         </View>
 
-        <View className="space-y-5 w-full mt-14">
+        <View className="space-y-5 w-full mt-16">
         <TouchableOpacity
-          className="bg-[#d2b05c] h-14 w-full items-center justify-center rounded-md" 
+          className="bg-[#eeca70] h-14 w-full items-center justify-center rounded-md" 
           onPress={()=> navigation.navigate("SignUp")}>
             <Text className="font-bold text-slate-700 text-lg">Get Started</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           className="bg-slate-200 h-14 w-full items-center justify-center rounded-md shadow-sm" 
-          onPress={()=> navigation.navigate("SignUp")}
+          onPress={()=> navigation.navigate("SignIn")}
           >
             <Text className="font-bold text-slate-700 text-lg">I already have an account</Text>
         </TouchableOpacity>
