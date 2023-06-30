@@ -1,24 +1,21 @@
-import { StyleSheet, View, Text } from 'react-native';
-import PagerView from 'react-native-pager-view';
+import { SafeAreaView, View, Text, Image } from 'react-native'
+import React from 'react'
+import GlobalStyles from "../Config/GlobalStyles"
+import Logo from "../assets/logo.png"
 
 const Welcome = () => {
-    return (
-      <PagerView style={styles.pagerView} initialPage={0} >
-        <View key="1">
-          <Text>First Pageee</Text>
+  return (
+    <SafeAreaView style={GlobalStyles.droidSafeArea} className="h-full bg-[#14141414]">
+      <View className=" items-center">
+        <View className="mt-10">
+          <Image 
+            source={Logo}
+            className="w-24 h-24 p-"
+          />
         </View>
-        <View key="2">
-          <Text>Second page</Text>
-        </View>
-      </PagerView>
-    );
-  };
-  
-  const styles = StyleSheet.create({
-    pagerView: {
-      flex: 1,
-      backgroundColor: "green"
-    },
-  });
+      </View>
+    </SafeAreaView>
+  )
+}
 
-  export default Welcome;
+export default Welcome
