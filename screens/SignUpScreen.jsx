@@ -19,7 +19,7 @@ const SignUpScreen = () => {
           <View className="space-y-1">
             <Text className="text-lg font-semibold">Username<Text className="text-red-400">*</Text></Text>
             <TextInput
-              className="border-zinc-300 px-3 w-full h-14 border rounded-md"
+              className="border-zinc-300 px-3 font-semibold w-full h-14 border rounded-md"
               placeholder='Enter Username'
               textAlignVertical='center'
             />
@@ -28,7 +28,7 @@ const SignUpScreen = () => {
           <View className="space-y-1">
             <Text className="text-lg font-semibold">Email Address<Text className="text-red-400">*</Text></Text>
             <TextInput
-              className="border-zinc-300 px-3 w-full h-12 border rounded-md"
+              className="border-zinc-300 px-3 font-semibold w-full h-12 border rounded-md"
               placeholder='Enter your email'
               textAlignVertical='center'
             />
@@ -37,7 +37,7 @@ const SignUpScreen = () => {
           <View className="space-y-1">
             <Text className="text-lg font-semibold">Firstname<Text className="text-red-400">*</Text></Text>
             <TextInput
-              className="border-zinc-300 px-3 w-full h-12 border rounded-md"
+              className="border-zinc-300 px-3 font-semibold w-full h-12 border rounded-md"
               placeholder='Enter your Firstname'
               textAlignVertical='center'
               autoCapitalize='words'
@@ -47,7 +47,7 @@ const SignUpScreen = () => {
           <View className="space-y-1">
             <Text className="text-lg font-semibold">Lastname<Text className="text-red-400">*</Text></Text>
             <TextInput
-              className="border-zinc-300 px-3 w-full h-12 border rounded-md"
+              className="border-zinc-300 px-3 font-semibold w-full h-12 border rounded-md"
               placeholder='Enter your Lastname'
               textAlignVertical='center'
               autoCapitalize='words'
@@ -57,7 +57,7 @@ const SignUpScreen = () => {
           <View className="space-y-1">
             <Text className="text-lg font-semibold">Password<Text className="text-red-400">*</Text></Text>
             <TextInput
-              className="border-zinc-300 px-3 w-full h-12 border rounded-md"
+              className="border-zinc-300 px-3 font-semibold w-full h-12 border rounded-md"
               placeholder='Enter Password'
               textAlignVertical='center'
               secureTextEntry={true}
@@ -67,23 +67,23 @@ const SignUpScreen = () => {
           <View className="space-y-1">
             <Text className="text-lg font-semibold">Confirm Password<Text className="text-red-400">*</Text></Text>
             <TextInput
-              className="border-zinc-300 px-3 w-full h-12 border rounded-md mb-6"
+              className="border-zinc-300 px-3 font-semibold w-full h-12 border rounded-md mb-6"
               placeholder='Confirm Password'
               textAlignVertical='center'
               secureTextEntry={true}
             />
           </View>
 
-        </ScrollView>
         <TouchableOpacity
-          className="bg-[#eeca70] h-14 w-full items-center absolute bottom-10 left-6  justify-center rounded-md" 
+          className="bg-[#eeca70] h-16 w-full items-center justify-center rounded-md" 
           onPress={()=> navigation.navigate("Validate")}>
-            <Text className="font-bold text-white text-lg">Sign Up</Text>
+            <Text className="font-bold text-white text-xl">Sign Up</Text>
         </TouchableOpacity>
         <View className="flex flex-row items-center justify-center">
           <Text>Already have an account?</Text>
           <TouchableOpacity onPress={() => navigation.navigate("SignIn")}><Text className="font-bold text-lg text-[#eeca70]">Sign In</Text></TouchableOpacity>
         </View>
+        </ScrollView>
       </View>
     </SafeAreaView>
   )
