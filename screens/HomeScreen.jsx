@@ -16,13 +16,13 @@ const HomeScreen = () => {
           <View className="flex-1"><Text className="text-3xl font-bold text-slate-700">SamaNet</Text></View>
           <View className="flex flex-row space-x-2">
 
-            <TouchableOpacity className="bg-[#eeca70] p-2 rounded-full">
+            <TouchableOpacity className="bg-gray-300 p-2 rounded-full">
             <Entypo name="plus" size={24} color="rgb(51, 65, 85)" />
             </TouchableOpacity>
-            <TouchableOpacity className="bg-[#eeca70] p-2 rounded-full">
+            <TouchableOpacity className="bg-gray-300 p-2 rounded-full">
               <Ionicons name="person" size={24} color="rgb(51, 65, 85)" />
             </TouchableOpacity>
-            <TouchableOpacity className="bg-[#eeca70] p-2 rounded-full">
+            <TouchableOpacity className="bg-gray-300 p-2 rounded-full">
               <Ionicons name="chatbubble-ellipses-sharp" size={24} color="rgb(51, 65, 85)" />  
             </TouchableOpacity>  
 
@@ -34,7 +34,7 @@ const HomeScreen = () => {
       </View>
       <ScrollView horizontal={true} className="mt-3 space-x-2" showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingRight:20}}>
         
-        <TouchableOpacity className=" h-44 w-32 bg-red-300 rounded-lg">
+        <TouchableOpacity className=" h-44 w-32  bg-gray-300 rounded-lg">
           <Image 
             source={Logo}
             className="h-28  w-full rounded-lg"
@@ -100,14 +100,25 @@ const HomeScreen = () => {
 
       </ScrollView>
 
-      <View className="flex flex-row h-14 w-full mt-6 rounded-full bg-slate-200">
-        <Pressable onPress={() => setField(0)} className={`rounded-full h-full w-1/2  items-center justify-center ${feed === 0 &&  'bg-green-400'}`}>
+      <View className="flex flex-row h-14 w-full mt-6 rounded-full bg-gray-200 ">
+        <Pressable onPress={() => setField(0)} className={`rounded-full h-full w-1/2  items-center justify-center ${feed === 0 &&  'bg-[#eeca70]'}`}>
           <Text className={`text-lg font-bold text-slate-700 ${feed === 0 &&  'text-white'}`}>Explore</Text>
         </Pressable>
-        <Pressable onPress={() => setField(1)} className={`rounded-full h-full w-1/2  items-center justify-center ${feed === 1 && 'bg-green-400'}`}>
-          <Text className={`text-lg font-bold text-slate-700 ${feed === 1 &&  'text-white'}`}>Explore</Text>
+        <Pressable onPress={() => setField(1)} className={`rounded-full h-full w-1/2  items-center justify-center ${feed === 1 && 'bg-[#eccb78]'}`}>
+          <Text className={`text-lg font-bold text-slate-700 ${feed === 1 &&  'text-white'}`}>Discover</Text>
         </Pressable>
       </View>
+
+    {feed === 0 && ( 
+  <Text>Explore</Text>
+    
+    
+    )}
+     
+    
+  {feed === 1 && (
+  <Text>Discover</Text>  
+  )}
 
       </View>
     </SafeAreaView>
