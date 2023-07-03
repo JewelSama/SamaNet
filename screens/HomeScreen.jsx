@@ -6,7 +6,7 @@ import Logo from "../assets/icon1.png"
 import Pfp from "../assets/avatar3.jpg"
 
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   const [feed, setField] = useState(0)
 
   return (
@@ -22,7 +22,7 @@ const HomeScreen = () => {
             <TouchableOpacity className="bg-gray-300 p-2 rounded-full">
               <Ionicons name="person" size={24} color="rgb(51, 65, 85)" />
             </TouchableOpacity>
-            <TouchableOpacity className="bg-gray-300 p-2 rounded-full">
+            <TouchableOpacity onPress={() => navigation.navigate('ChatList')} className="bg-gray-300 p-2 rounded-full">
               <Ionicons name="chatbubble-ellipses-sharp" size={24} color="rgb(51, 65, 85)" />  
             </TouchableOpacity>  
 
