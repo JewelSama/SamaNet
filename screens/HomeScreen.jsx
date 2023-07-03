@@ -17,7 +17,7 @@ const HomeScreen = () => {
           <View className="flex flex-row space-x-2">
 
             <TouchableOpacity className="bg-gray-300 p-2 rounded-full">
-            <Entypo name="plus" size={24} color="rgb(51, 65, 85)" />
+            <Entypo name="magnifying-glass" size={24} color="rgb(51, 65, 85)" />
             </TouchableOpacity>
             <TouchableOpacity className="bg-gray-300 p-2 rounded-full">
               <Ionicons name="person" size={24} color="rgb(51, 65, 85)" />
@@ -99,8 +99,11 @@ const HomeScreen = () => {
         </TouchableOpacity>
 
       </ScrollView>
+      <TouchableOpacity className="bg-gray-400 p-2 w-10 h-10 self-center mt-2 rounded-full">
+            <Entypo name="plus" size={24} color="rgb(51, 65, 85)" />
+            </TouchableOpacity>
 
-      <View className="flex flex-row h-14 w-full mt-6 rounded-full bg-gray-200 ">
+      <View className="flex flex-row h-14 w-full mt-4 rounded-full bg-gray-200 ">
         <Pressable onPress={() => setField(0)} className={`rounded-full h-full w-1/2  items-center justify-center ${feed === 0 &&  'bg-[#eeca70]'}`}>
           <Text className={`text-lg font-bold text-slate-700 ${feed === 0 &&  'text-white'}`}>Explore</Text>
         </Pressable>
