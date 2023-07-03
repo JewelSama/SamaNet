@@ -4,6 +4,7 @@ import SignInScreen from "./screens/SignInScreen"
 import SignUpScreen from "./screens/SignUpScreen"
 import Welcome from "./screens/Welcome"
 import ValidateScreen from "./screens/ValidateScreen"
+import ChatListScreen from "./screens/ChatListScreen"
 
 const StackNavigator = () => {
     const Stack = createStackNavigator()
@@ -16,6 +17,7 @@ const StackNavigator = () => {
         <Stack.Screen name="Validate" component={ValidateScreen} />
         <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="ChatList" component={ChatListScreen} />
     </Stack.Navigator>
   )
 }
