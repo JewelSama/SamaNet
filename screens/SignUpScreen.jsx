@@ -4,6 +4,7 @@ import GlobalStyles from '../Config/GlobalStyles'
 import { useNavigation } from '@react-navigation/native'
 
 const SignUpScreen = () => {
+
   const navigation = useNavigation()
   return (
     <SafeAreaView style={GlobalStyles.droidSafeArea} className="h-full bg-white">
@@ -66,12 +67,14 @@ const SignUpScreen = () => {
 
           <View className="space-y-1">
             <Text className="text-lg font-semibold">Confirm Password<Text className="text-red-400">*</Text></Text>
+            
             <TextInput
               className="border-zinc-300 px-3 font-semibold w-full h-12 border rounded-md mb-6"
               placeholder='Confirm Password'
               textAlignVertical='center'
               secureTextEntry={true}
             />
+            
           </View>
 
         <TouchableOpacity
