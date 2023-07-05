@@ -11,7 +11,7 @@ const SettingsScreen = ({navigation}) =>  {
     }
 
   return (
-    <SafeAreaView className="bg-white h-full">
+    <SafeAreaView className="h-full bg-white">
         <View className="px-4">
             <View className="flex flex-row">
                 <Text className="flex-1 text-3xl font-bold text-slate-700">Settings</Text>
@@ -28,64 +28,64 @@ const SettingsScreen = ({navigation}) =>  {
             </View>
             <>
                 <ScrollView className="mt-8 h-full space-y-4" showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom:20}}>
-                    <TouchableOpacity onPress={() => navigation.navigate("EditProfile")} className="w-full shadow-sm px-3 flex bg-yellow-500 flex-row h-16 items-center rounded-lg">
+                    <TouchableOpacity onPress={() => navigation.navigate("EditProfile")} className="w-full shadow-sm px-3 flex bg-white flex-row h-16 items-center rounded-lg">
                         <View className="flex flex-row space-x-3 items-center flex-1">
-                            <FontAwesome5 name='user-edit' size={30} color="white" />
-                            <Text className="text-lg font-bold text-white">Edit Profile</Text>
+                            <FontAwesome5 name='user-edit' size={30} color="rgb(51, 65, 85)" />
+                            <Text className="text-lg font-bold text-slate-700">Edit Profile</Text>
                         </View>
-                        <Entypo name='chevron-right' size={30} color="white" />
+                        <Entypo name='chevron-right' size={30} color="rgb(51, 65, 85)" />
                     </TouchableOpacity>
 
 
-                    <TouchableOpacity className="w-full shadow-sm px-3 flex flex-row h-16 items-center bg-yellow-400 rounded-lg">
+                    <TouchableOpacity className="w-full shadow-sm px-3 flex flex-row h-16 items-center bg-white rounded-lg">
                         <View className="flex flex-row space-x-3 items-center flex-1">
-                            <Entypo name='block' size={30} color="white" />
-                            <Text className="text-lg font-bold text-white">Blocked Accounts</Text>
+                            <Entypo name='block' size={30} color="rgb(51, 65, 85)" />
+                            <Text className="text-lg font-bold text-slate-700">Blocked Accounts</Text>
                         </View>
-                        <Entypo name='chevron-right' size={30} color="white" />
+                        <Entypo name='chevron-right' size={30} color="rgb(51, 65, 85)" />
                     </TouchableOpacity>
 
-                    <TouchableOpacity className="w-full shadow-sm px-3 flex flex-row h-16 items-center bg-yellow-500 rounded-lg">
+                    <TouchableOpacity className="w-full shadow-sm px-3 flex flex-row h-16 items-center bg-white rounded-lg">
                         <View className="flex flex-row space-x-3 items-center flex-1">
-                            <Entypo name='bell' size={30} color="white" />
-                            <Text className="text-lg font-bold text-white">Notifications</Text>
+                            <Entypo name='bell' size={30} color="rgb(51, 65, 85)" />
+                            <Text className="text-lg font-bold text-slate-700">Notifications</Text>
                         </View>
-                        <Entypo name='chevron-right' size={30} color="white" />
+                        <Entypo name='chevron-right' size={30} color="rgb(51, 65, 85)" />
                     </TouchableOpacity>
 
-                    <TouchableOpacity className="w-full shadow-sm px-3 flex flex-row h-16 items-center bg-yellow-400 rounded-lg">
+                    <TouchableOpacity className="w-full shadow-sm px-3 flex flex-row h-16 items-center bg-white rounded-lg">
                         <View className="flex flex-row space-x-3 items-center flex-1">
-                            <MaterialIcons name='privacy-tip' size={30} color="white" />
-                            <Text className="text-lg font-bold text-white">Privacy Policy</Text>
+                            <MaterialIcons name='privacy-tip' size={30} color="rgb(51, 65, 85)" />
+                            <Text className="text-lg font-bold text-slate-700">Privacy Policy</Text>
                         </View>
-                        <Entypo name='chevron-right' size={30} color="white" />
+                        <Entypo name='chevron-right' size={30} color="rgb(51, 65, 85)" />
                     </TouchableOpacity>
 
-                    <TouchableOpacity className="w-full px-3 shadow-sm flex flex-row h-16 items-center bg-yellow-500 rounded-lg">
+                    <TouchableOpacity className="w-full px-3 shadow-sm flex flex-row h-16 items-center bg-white rounded-lg">
                         <View className="flex flex-row space-x-3 items-center flex-1">
-                            <MaterialCommunityIcons name='vector-triangle' size={30} color="white" />
-                            <Text className="text-lg font-bold text-white">Terma Of service</Text>
+                            <MaterialCommunityIcons name='vector-triangle' size={30} color="rgb(51, 65, 85)" />
+                            <Text className="text-lg font-bold text-slate-700">Terma Of service</Text>
                         </View>
-                        <Entypo name='chevron-right' size={30} color="white" />
+                        <Entypo name='chevron-right' size={30} color="rgb(51, 65, 85)" />
                     </TouchableOpacity>
 
-                    <TouchableOpacity className="w-full px-3 flex flex-row h-16 shadow-md items-center bg-yellow-400 rounded-lg">
+                    <TouchableOpacity className="w-full px-3 flex flex-row h-16 shadow-sm items-center bg-white rounded-lg">
                         <View className="flex flex-row space-x-3 items-center flex-1">
-                            <FontAwesome5 name='file-contract' size={30} color="white" />
-                            <Text className="text-lg font-bold text-white">Community Guidelines</Text>
+                            <FontAwesome5 name='file-contract' size={30} color="rgb(51, 65, 85)" />
+                            <Text className="text-lg font-bold text-slate-700">Community Guidelines</Text>
                         </View>
-                        <Entypo name='chevron-right' size={30} color="white" />
+                        <Entypo name='chevron-right' size={30} color="rgb(51, 65, 85)" />
                     </TouchableOpacity>
 
-                    <TouchableOpacity className="w-full px-3 flex flex-row shadow-sm h-16 items-center bg-yellow-500 rounded-lg">
+                    <TouchableOpacity className="w-full px-3 flex flex-row shadow-sm h-16 items-center bg-white rounded-lg">
                         <View className="flex flex-row space-x-3 items-center flex-1">
-                            <FontAwesome5 name='question-circle' size={30} color="white" />
-                            <Text className="text-lg font-bold text-white">Support</Text>
+                            <FontAwesome5 name='question-circle' size={30} color="rgb(51, 65, 85)" />
+                            <Text className="text-lg font-bold text-slate-700">Support</Text>
                         </View>
-                        <Entypo name='chevron-right' size={30} color="white" />
+                        <Entypo name='chevron-right' size={30} color="rgb(51, 65, 85)" />
                     </TouchableOpacity>
 
-                    <TouchableOpacity className="w-full px-3 flex flex-row h-16 items-center bg-red-200 rounded-lg" onPress={Logout}>
+                    <TouchableOpacity className="w-full px-3 flex flex-row h-16 items-center bg-red-100 rounded-lg" onPress={Logout}>
                         <View className="flex flex-row space-x-3 items-center flex-1">
                             <MaterialCommunityIcons name='logout' size={30} color="color: rgb(220, 38, 38)" />
                             <Text className="text-lg font-bold text-red-600">Logout</Text>
