@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, TouchableOpacity, Image, TextInput } from 'react-native'
+import { View, Text, SafeAreaView, TouchableOpacity, Image, TextInput, ScrollView } from 'react-native'
 import { Entypo, FontAwesome } from "@expo/vector-icons"
 import Logo from "../assets/logo.png"
 import { useState } from "react"
@@ -11,7 +11,7 @@ const SearchScreen = ({ navigation }) => {
 
 
   return (
-    <SafeAreaView className="bg-gray-100 h-full">
+    <SafeAreaView className="bg-white h-full">
         <View className="px-4">
             <View className="flex flex-row justify-between">
                 <TouchableOpacity className=" h-10 w-10 rounded-full  bg-gray-200 items-center justify-center" onPress={() => navigation.goBack()}>
@@ -44,7 +44,14 @@ const SearchScreen = ({ navigation }) => {
               )}
               </View>
         </View>
-              <Search />
+        <ScrollView className="mt-4" showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom:20}}>
+          <Search />
+          <Search />
+          <Search />
+          <Search />
+          <Search />
+          <Search />
+        </ScrollView>
 
          </View>
     </SafeAreaView>        
