@@ -11,6 +11,7 @@ import SearchScreen from "./screens/SearchScreen"
 import SettingsScreen from "./screens/SettingsScreen"
 import EditProfileScreen from "./screens/EditProfileScreen"
 import CreatePostScreen from "./screens/CreatePostScreen"
+import ImgScreen from "./screens/ImgScreen"
 
 const StackNavigator = () => {
     const Stack = createStackNavigator()
@@ -45,6 +46,12 @@ const StackNavigator = () => {
           transi()
           
         } />
+
+        <Stack.Screen name="ImgScreen" component={ImgScreen} options={
+          transi()
+          
+        } />
+
     </Stack.Navigator>
   )
 }
