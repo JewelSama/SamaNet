@@ -74,7 +74,7 @@ const CreatePostScreen = ({ navigation }) => {
                       <View className="mt-5 rounded-sm">
                         <Image 
                           source={{ uri: image }}
-                          className="h-96"
+                          className="h-96 rounded-sm"
                         />
                       </View>
                       <TouchableOpacity className="items-center mt-4 bg-gray-200 p-2 rounded-md" onPress={PickImage}><Text className="text-lg font-bold text-slate-700">Change Image</Text></TouchableOpacity>
