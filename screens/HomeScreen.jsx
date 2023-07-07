@@ -53,7 +53,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity className=" h-44 w-32 bg-red-300 rounded-lg">
+        <TouchableOpacity className=" h-44 w-32 bg-red-300 rounded-lg" onPress={() => navigation.navigate('ImgScreen', {img: Post4})}>
           <Image 
             source={Post4}
             className="h-full  w-full rounded-lg"
@@ -69,7 +69,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity className=" h-44 w-32 bg-red-300 rounded-lg">
+        <TouchableOpacity className=" h-44 w-32 bg-red-300 rounded-lg" onPress={() => navigation.navigate('ImgScreen', {img: Post3})}>
           <Image 
             source={Post3}
             className="h-full  w-full rounded-lg"
@@ -85,7 +85,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity className=" h-44 w-32 bg-red-300 rounded-lg">
+        <TouchableOpacity className=" h-44 w-32 bg-red-300 rounded-lg" onPress={() => navigation.navigate('ImgScreen', {img: Post1})}>
           <Image 
             source={Post1}
             className="h-full  w-full rounded-lg"
