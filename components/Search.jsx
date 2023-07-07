@@ -19,7 +19,7 @@ const Search = () => {
                 </View>
                 </View>
                 <View>
-                    <AntDesign name="right" size={30} color="(51, 65, 85)" />
+                    <AntDesign name="right" size={30} color="rgb(51, 65, 85)" />
                 </View>
             </TouchableOpacity>
 
