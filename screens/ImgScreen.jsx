@@ -5,7 +5,7 @@ const ImgScreen = ({ navigation, route }) => {
     const { img } = route.params;
   return (
     <View className="bg-white h-full relative">
-        <Image 
+        <Image
             source={img}
             className="h-full w-full"
         />
