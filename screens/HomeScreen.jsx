@@ -7,25 +7,30 @@ import Pfp from "../assets/avatar3.jpg"
 import Post1 from "../assets/post1.jpeg"
 import Post3 from "../assets/post3.jpeg"
 import Post4 from "../assets/post4.jpeg"
+import Post from '../components/Post'
 
 
 const HomeScreen = ({ navigation }) => {
   const [feed, setField] = useState(0)
+  
+
+
+
 
   return (
-    <SafeAreaView style={GlobalStyles.droidSafeArea} className="h-full ">
+    <SafeAreaView style={GlobalStyles.droidSafeArea} className="h-full bg-white">
       <View className="px-4">
         <View className="mt-4 flex flex-row">
           <View className="flex-1"><Text className="text-3xl font-bold text-slate-700">SamaNet</Text></View>
           <View className="flex flex-row space-x-2">
 
-            <TouchableOpacity onPress={() => navigation.navigate('Search')} className="bg-gray-300 p-2 rounded-full">
+            <TouchableOpacity onPress={() => navigation.navigate('Search')} className="bg-gray-100 p-2 rounded-full">
             <Entypo name="magnifying-glass" size={24} color="rgb(51, 65, 85)" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Profile')} className="bg-gray-300 p-2 rounded-full">
+            <TouchableOpacity onPress={() => navigation.navigate('Profile')} className="bg-gray-100 p-2 rounded-full">
               <Ionicons name="person" size={24} color="rgb(51, 65, 85)" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('ChatList')} className="bg-gray-300 p-2 rounded-full">
+            <TouchableOpacity onPress={() => navigation.navigate('ChatList')} className="bg-gray-100 p-2 rounded-full">
               <Ionicons name="chatbubble-ellipses-sharp" size={24} color="rgb(51, 65, 85)" />  
             </TouchableOpacity>  
 
@@ -102,11 +107,11 @@ const HomeScreen = ({ navigation }) => {
         </TouchableOpacity>
 
       </ScrollView>
-      <TouchableOpacity className="bg-gray-300 p-2 w-10 h-10 self-center mt-2 rounded-full" onPress={() => navigation.navigate('Create')}>
-            <Entypo name="plus" size={24} color="rgb(51, 65, 85)" />
+      <TouchableOpacity className="bg-gray-200 items-center justify-center w-10 h-10 self-center mt-2 rounded-full" onPress={() => navigation.navigate('Create')}>
+            <Entypo name="plus" size={28}  color="rgb(51, 65, 85)" />
       </TouchableOpacity>
 
-      <View className="flex flex-row h-14 w-full mt-4 rounded-full bg-gray-200 ">
+      <View className="flex flex-row h-14 w-full mt-2 rounded-full bg-gray-200 mb-2">
         <Pressable onPress={() => setField(0)} className={`rounded-full h-full w-1/2  items-center justify-center ${feed === 0 &&  'bg-[#eeca70]'}`}>
           <Text className={`text-lg font-bold text-slate-700 ${feed === 0 &&  'text-white'}`}>Explore</Text>
         </Pressable>
@@ -115,10 +120,10 @@ const HomeScreen = ({ navigation }) => {
         </Pressable>
       </View>
 
-    {feed === 0 && ( 
-  <Text>Explore</Text>
-    
-    
+    {feed === 0 && (
+      <ScrollView showsVerticalScrollIndicator="false" contentContainerStyle={{paddingBottom: 30}}> 
+        <Post />
+      </ScrollView>
     )}
      
     
