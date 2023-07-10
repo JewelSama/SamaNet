@@ -13,7 +13,7 @@ const ProfileScreen = ({ navigation }) => {
             headerTintColor: 'rgb(51, 65, 85)',
             headerRight: () => (
                 <TouchableOpacity className="mr-2" onPress={() => navigation.navigate("Settings")}>
-                    <Entypo name='dots-three-horizontal' size={24} color="rgb(51, 65, 85)" />
+                    <Feather name='settings' size={32} color="rgb(51, 65, 85)" />
                 </TouchableOpacity>
             )
         })
