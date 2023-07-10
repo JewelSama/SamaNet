@@ -12,6 +12,7 @@ import SettingsScreen from "./screens/SettingsScreen"
 import EditProfileScreen from "./screens/EditProfileScreen"
 import CreatePostScreen from "./screens/CreatePostScreen"
 import ImgScreen from "./screens/ImgScreen"
+import ChatScreen from "./screens/ChatScreen"
 
 const StackNavigator = () => {
     const Stack = createStackNavigator()
@@ -32,6 +33,10 @@ const StackNavigator = () => {
         <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="ChatList" component={ChatListScreen} />
+        <Stack.Screen name="ChatScreen" component={ChatScreen} options={
+          transi()
+          
+        } />
         <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Search" component={SearchScreen} />
         <Stack.Screen name="Settings" component={SettingsScreen} options={
@@ -51,6 +56,8 @@ const StackNavigator = () => {
           transi()
           
         } />
+
+        
 
     </Stack.Navigator>
   )
