@@ -12,7 +12,7 @@ const SettingsScreen = ({navigation}) =>  {
 
   return (
     <SafeAreaView className="h-full bg-white">
-        <View className="px-4">
+        <View className="px-4 h-full">
             <View className="flex flex-row">
                 <Text className="flex-1 text-3xl font-bold text-slate-700">Settings</Text>
                 <TouchableOpacity className="h-10 w-10 rounded-full bg-gray-300 items-center justify-center" onPress={() => navigation.goBack()}>
