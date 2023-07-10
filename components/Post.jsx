@@ -2,6 +2,8 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import { useState } from 'react'
 import { Ionicons, Entypo, AntDesign, FontAwesome5 } from "@expo/vector-icons"
 import Pfp from "../assets/avatar3.jpg"
+import Post1 from "../assets/post3.jpeg"
+import { useNavigation } from '@react-navigation/native'
 
 
 
@@ -9,7 +11,7 @@ import Pfp from "../assets/avatar3.jpg"
 
 
 const Post = () => {
-
+    const navigation = useNavigation()
     const [like, setLike] = useState(false)
     const caption = "nisi quae ducimus unde aliquam, labore, dolorum modi architecto. Ullam blanditiis porro perspiciatis itaque quos, repellendus culpa?"
 
@@ -21,7 +23,7 @@ const Post = () => {
 
 
   return (
-    <View className="bg-gray-100 p-4 mt-2 h-56 rounded-md">
+    <View className={`bg-gray-100 p-4 mt-2 rounded-md`}>
           <View className="flex flex-row mb-1">
             <View className="flex flex-row flex-1 space-x-2">
               <TouchableOpacity>
@@ -47,7 +49,15 @@ const Post = () => {
               <Text>{caption}</Text>
             </View>
           )}
-          <View className="flex flex-row border-b p-2  mt-6  border-gray-300">
+          {Pfp && (
+            <TouchableOpacity onPress={() => navigation.navigate('ImgScreen', {img: Post1})} className="justify-center items-center self-center h-64 w-64 mt-4">
+                <Image 
+                    source={Post1}
+                    className="h-full w-full"
+                />
+            </TouchableOpacity>
+          )}
+          <View className="flex flex-row border-b p-2  mt-4  border-gray-300">
             <TouchableOpacity className="flex flex-1 flex-row space-x-1 items-center">
               <AntDesign name="like2" size={18} color="rgb(31, 41, 55)" />
               <Text className="text-gray-800 font-bold text-md">54</Text>
