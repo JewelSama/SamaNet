@@ -44,7 +44,17 @@ const SearchScreen = ({ navigation }) => {
               )}
               </View>
         </View>
-        <ScrollView className="mt-4" showsVerticalScrollIndicator={false} contentContainerStyle={{paddingBottom:20}}>
+        <ScrollView className="mt-4 h-full" showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100}}>
+          <Search />
+          <Search />
+          <Search />
+          <Search />
+          <Search />
+          <Search />
+          <Search />
+          <Search />
+          <Search />
+          <Search />
           <Search />
           <Search />
           <Search />
