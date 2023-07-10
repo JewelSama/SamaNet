@@ -19,7 +19,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={GlobalStyles.droidSafeArea} className="h-full bg-white">
-      <View className="px-4">
+      <View className="px-4 h-full">
         <View className="mt-4 flex flex-row">
           <View className="flex-1"><Text className="text-3xl font-bold text-slate-700">SamaNet</Text></View>
           <View className="flex flex-row space-x-2">
@@ -40,7 +40,7 @@ const HomeScreen = ({ navigation }) => {
       <View className="mt-5">
         <Text className="text-slate-700 font-semibold text-lg">Stories</Text>
       </View>
-      <ScrollView horizontal={true} className="mt-3 space-x-2" showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingRight:20}}>
+      <ScrollView horizontal={true} className="mt-3 space-x-2 h-96 p-1" showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingRight:20}}>
         
         <TouchableOpacity className=" h-44 w-32  bg-gray-300 rounded-lg">
           <Image 
@@ -106,6 +106,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </TouchableOpacity>
 
+      <Text>gvuuhikjl</Text>
       </ScrollView>
       <TouchableOpacity className="bg-gray-200 items-center justify-center w-10 h-10 self-center mt-2 rounded-full" onPress={() => navigation.navigate('Create')}>
             <Entypo name="plus" size={28}  color="rgb(51, 65, 85)" />
@@ -121,8 +122,9 @@ const HomeScreen = ({ navigation }) => {
       </View>
 
     {feed === 0 && (
-      <ScrollView showsVerticalScrollIndicator="false" contentContainerStyle={{paddingBottom: 30}}> 
+      <ScrollView className="h-full" showsVerticalScrollIndicator="false" contentContainerStyle={{ paddingBottom: 30}}> 
         <Post />
+        <Post />        
       </ScrollView>
     )}
      
