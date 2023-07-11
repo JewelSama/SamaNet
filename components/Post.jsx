@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native'
 import { useState } from 'react'
 import { Ionicons, Entypo, AntDesign, FontAwesome5 } from "@expo/vector-icons"
 import Pfp from "../assets/avatar3.jpg"
-import Post1 from "../assets/post3.jpeg"
+import Post1 from "../assets/post4.jpeg"
 import { useNavigation } from '@react-navigation/native'
 
 
@@ -46,7 +46,7 @@ const Post = () => {
           </View>
           {caption && (
             <View>
-              <Text>{caption}</Text>
+              <Text className="text-gray-700 font-semibold">{caption}</Text>
             </View>
           )}
           {Pfp && (
