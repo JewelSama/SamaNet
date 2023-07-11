@@ -16,7 +16,6 @@ const HomeScreen = ({ navigation }) => {
 
 
 
-
   return (
     <SafeAreaView style={GlobalStyles.droidSafeArea} className="h-full bg-white">
       <View className="px-4 h-full">
@@ -40,7 +39,7 @@ const HomeScreen = ({ navigation }) => {
       <View className="mt-5">
         <Text className="text-slate-700 font-semibold text-lg">Stories</Text>
       </View>
-      <ScrollView horizontal={true} className="mt-3 space-x-2 h-96 p-1" showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingRight:20}}>
+      <ScrollView horizontal={true} className={`mt-3 space-x-2  p-1 ${feed === 0 && "h-96"} ${feed === 1 && "h-full"}`} showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingRight:20}}>
         
         <TouchableOpacity className=" h-44 w-32  bg-gray-300 rounded-lg">
           <Image 
@@ -106,7 +105,6 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </TouchableOpacity>
 
-      <Text>gvuuhikjl</Text>
       </ScrollView>
       <TouchableOpacity className="bg-gray-200 items-center justify-center w-10 h-10 self-center mt-2 rounded-full" onPress={() => navigation.navigate('Create')}>
             <Entypo name="plus" size={28}  color="rgb(51, 65, 85)" />
@@ -130,7 +128,7 @@ const HomeScreen = ({ navigation }) => {
      
     
   {feed === 1 && (
-    <View className="items-center justify-center mt-32">
+    <View className="items-center justify-center mt-2 h-96">
       <Text className="text-3xl font-semibold text-gray-300">Coming Soon</Text>
     </View>
   )}
