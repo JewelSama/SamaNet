@@ -1,12 +1,55 @@
-import { SafeAreaView, ScrollView, View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import { SafeAreaView, ScrollView, View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
+import { useState, useContext } from 'react'
 import GlobalStyles from '../Config/GlobalStyles'
-import { useNavigation } from '@react-navigation/native'
 import Logo from "../assets/logo.png"
+import { GlobalContext } from '../context'
+import { baseUrl } from '../utils/endPoints'
+
+const SignInScreen = ({ navigation }) => {
+  const [loading, setLoading] = useState(false)
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const { setUser, user } = useContext(GlobalContext)
+
+  
+
+  const formData = {
+    email: email.toLowerCase().trim(),
+    password: password.trim()
+  }
 
 
-const SignInScreen = () => {
-  const navigation = useNavigation()
+  const Login = () => {
+    if(!(email && password)){
+      setLoading(false)
+      return alert("Please fill in all fields")
+    }
+    setLoading(true)
+    fetch(`${baseUrl}/user/login`, {
+      method: "POST",
+      headers: new Headers({
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      }),
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(resp => {
+      setLoading(false)
+      if(resp?.error){
+        return alert(resp?.error)
+      }
+      setUser(resp)
+      navigation.navigate("Home")
+    })
+    .catch(err =>{
+      setLoading(false)
+      alert("Something went wrong")
+      console.log(err.message)
+    })
+  }
+
+
   return (
     <SafeAreaView style={GlobalStyles.droidSafeArea} className="h-full bg-white">
     <ScrollView className="px-7 relative h-full" contentContainerStyle={{paddingBottom: 10}} automaticallyAdjustKeyboardInsets={true} showsVerticalScrollIndicator={false}>
@@ -22,6 +65,8 @@ const SignInScreen = () => {
               placeholder='Enter Email'
               textAlignVertical='center'
               spellCheck={false}
+              value={email}
+              onChangeText={setEmail}
             />
     </View>
 
@@ -32,6 +77,8 @@ const SignInScreen = () => {
               placeholder='Enter Password'
               textAlignVertical='center'
               secureTextEntry={true}
+              value={password}
+              onChangeText={setPassword}
             />
     </View>          
 
@@ -39,8 +86,10 @@ const SignInScreen = () => {
 
     <TouchableOpacity
           className="bg-[#eeca70] h-14 w-full items-center mt-10  justify-center rounded-md" 
-          onPress={()=> navigation.navigate("Home")}>
-            <Text className="font-bold text-white text-lg">Sign In</Text>
+          onPress={Login}>
+            {!loading ? (<Text className="font-bold text-white text-lg">Sign In</Text>) : (
+              <ActivityIndicator color="white" size="large" />
+            )}
     </TouchableOpacity>
     
     <View className="flex flex-row items-center mt-8 justify-center">
