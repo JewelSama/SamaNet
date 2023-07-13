@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { SafeAreaView, View, Text, TouchableOpacity, ScrollView, Image, Pressable } from 'react-native'
 import GlobalStyles from '../Config/GlobalStyles'
 import { Ionicons, Entypo } from "@expo/vector-icons"
@@ -8,18 +8,26 @@ import Post1 from "../assets/post1.jpeg"
 import Post3 from "../assets/post3.jpeg"
 import Post4 from "../assets/post4.jpeg"
 import Post from '../components/Post'
+import { GlobalContext } from '../context'
+import { baseUrl } from '../utils/endPoints'
 
 
 const HomeScreen = ({ navigation }) => {
   const [feed, setField] = useState(0)
-  
+  const { user } = useContext(GlobalContext)
+  // console.log(`${baseUrl}\\${user?.display_pic}`)
 
-
+  const ProfilePic_test = `${baseUrl}\\${user?.display_pic}`
+  let ProfilePic = ProfilePic_test.replace("public\\", "")
+  ProfilePic = ProfilePic.replaceAll("\\", "/")
+  ProfilePic = ProfilePic.replace("public/", "")
+  // console.log(ProfilePic)
+  // console.log(ProfilePic)
 
   return (
     <SafeAreaView style={GlobalStyles.droidSafeArea} className="h-full bg-white">
-      <View className="px-4 h-full">
-        <View className="mt-4 flex flex-row">
+      <View className="px-2 h-full">
+        <View className="mt-4 border-b border-gray-100 px-1 flex pb-3 mb-1 flex-row">
           <View className="flex-1"><Text className="text-3xl font-bold text-slate-700">SamaNet</Text></View>
           <View className="flex flex-row space-x-2">
 
@@ -35,29 +43,29 @@ const HomeScreen = ({ navigation }) => {
 
           </View>
         </View>
-
+      <ScrollView className="h-full" showsVerticalScrollIndicator={false}>
       <View className="mt-5">
         <Text className="text-slate-700 font-semibold text-lg">Stories</Text>
       </View>
-      <ScrollView horizontal={true} className={`mt-3 space-x-2  p-1 ${feed === 0 && "h-96"} ${feed === 1 && "h-full"}`} showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingRight:20}}>
+      <ScrollView horizontal={true} className={`mt-3  space-x-2 p-1`} showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingRight:20}}>
         
-        <TouchableOpacity className=" h-44 w-32  bg-gray-300 rounded-lg">
+        <TouchableOpacity className=" h-44 w-32 shadow-md  bg-gray-300 rounded-lg">
           <Image 
             source={Logo}
             className="h-28  w-full rounded-lg"
           />
-          <View className="self-center -mt-5 rounded-full h-10 w-10 items-center justify-center bg-[#eeca70]">
+          <View className="self-center -mt-5 rounded-full  h-10 w-10 items-center justify-center bg-[#eeca70]">
             <Image 
-              source={Pfp}
+              source={{uri: `${ProfilePic}`}}
               className="h-8 w-8 rounded-full"
             />
           </View>
           <View className="items-center">
-            <Text className="text-md font-bold text-white mt-3">@Username</Text>
+            <Text className="text-md font-bold text-white mt-3">@{user?.username}</Text>
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity className=" h-44 w-32 bg-red-300 rounded-lg" onPress={() => navigation.navigate('ImgScreen', {img: Post4})}>
+        <TouchableOpacity className=" h-44 w-32 shadow-md bg-red-300 rounded-lg" onPress={() => navigation.navigate('ImgScreen', {img: Post4})}>
           <Image 
             source={Post4}
             className="h-full  w-full rounded-lg"
@@ -73,7 +81,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity className=" h-44 w-32 bg-red-300 rounded-lg" onPress={() => navigation.navigate('ImgScreen', {img: Post3})}>
+        <TouchableOpacity className=" h-44 w-32 shadow-md bg-red-300 rounded-lg" onPress={() => navigation.navigate('ImgScreen', {img: Post3})}>
           <Image 
             source={Post3}
             className="h-full  w-full rounded-lg"
@@ -89,7 +97,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity className=" h-44 w-32 bg-red-300 rounded-lg" onPress={() => navigation.navigate('ImgScreen', {img: Post1})}>
+        <TouchableOpacity className=" h-44 w-32 shadow-md bg-red-300 rounded-lg" onPress={() => navigation.navigate('ImgScreen', {img: Post1})}>
           <Image 
             source={Post1}
             className="h-full  w-full rounded-lg"
@@ -106,7 +114,7 @@ const HomeScreen = ({ navigation }) => {
         </TouchableOpacity>
 
       </ScrollView>
-      <TouchableOpacity className="bg-gray-200 items-center justify-center w-10 h-10 self-center mt-2 rounded-full" onPress={() => navigation.navigate('Create')}>
+      <TouchableOpacity className="bg-gray-200  items-center justify-center w-10 h-10 self-center mt-2 rounded-full" onPress={() => navigation.navigate('Create')}>
             <Entypo name="plus" size={28}  color="rgb(51, 65, 85)" />
       </TouchableOpacity>
 
@@ -120,10 +128,10 @@ const HomeScreen = ({ navigation }) => {
       </View>
 
     {feed === 0 && (
-      <ScrollView className="h-full" showsVerticalScrollIndicator="false" contentContainerStyle={{ paddingBottom: 30}}> 
+      <> 
         <Post />
         <Post />        
-      </ScrollView>
+      </>
     )}
      
     
@@ -132,6 +140,7 @@ const HomeScreen = ({ navigation }) => {
       <Text className="text-3xl font-semibold text-gray-300">Coming Soon</Text>
     </View>
   )}
+  </ScrollView>
 
       </View>
     </SafeAreaView>

@@ -6,10 +6,6 @@ import Post1 from "../assets/post4.jpeg"
 import { useNavigation } from '@react-navigation/native'
 
 
-
-
-
-
 const Post = () => {
     const navigation = useNavigation()
     const [like, setLike] = useState(false)
@@ -23,7 +19,7 @@ const Post = () => {
 
 
   return (
-    <View className={`bg-gray-100 p-4 mt-2 rounded-md`}>
+    <View className={`bg-white shadow-sm p-4 mt-2 mb-2 rounded-md`}>
           <View className="flex flex-row mb-1">
             <View className="flex flex-row flex-1 space-x-2">
               <TouchableOpacity>
