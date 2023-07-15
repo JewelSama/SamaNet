@@ -6,6 +6,7 @@ export const GlobalContext = createContext()
 const GlobalProvider = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [token, setToken] = useState("")
+    const [Id, setId] = useState("")
     const [emailToken, setEmailToken] = useState("")
     const [user, setUser] = useState([])
     const [post, setPosts] = useState([])
@@ -18,12 +19,14 @@ const GlobalProvider = ({ children }) => {
             user,
             post,
             emailToken,
+            Id,
 
             setLoggedIn,
             setToken,
             setEmailToken,
             setUser,
-            setPosts
+            setPosts,
+            setId
         }}>
             {children}
         </GlobalContext.Provider>
