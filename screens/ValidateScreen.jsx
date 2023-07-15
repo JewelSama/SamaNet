@@ -10,7 +10,7 @@ import { baseUrl } from '../utils/endPoints'
 
 const ValidateScreen = ({ navigation, route }) => {
     const [loading, setLoading] = useState(false)
-    const { setUser, setToken } = useContext(GlobalContext)
+    const { setUser, setToken, setLoggedIn, setId } = useContext(GlobalContext)
 
     const {email} = route.params;
 
@@ -38,12 +38,20 @@ const ValidateScreen = ({ navigation, route }) => {
       .then(res => res.json())
       .then(resp => {
         if(resp?.error){
-          return alert(resp?.error)
-          
+          return alert(resp?.error)         
         }
-        console.log(resp)
+        // console.log(resp)
         setUser(resp)
-        setToken(resp?.authToken)
+        setId(resp?.id)
+        setLoggedIn(true)
+
+        AsyncStorage.setItem(
+          'Token',
+          resp?.authToken,
+        )
+        AsyncStorage.setItem(
+          'UserId', resp?.id.toString());
+
         setLoading(false)
         navigation.navigate("Home")
       })
