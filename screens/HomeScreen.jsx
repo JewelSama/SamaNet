@@ -11,11 +11,13 @@ import Post from '../components/Post'
 import { GlobalContext } from '../context'
 import { baseUrl } from '../utils/endPoints'
 import { useEffect } from 'react'
+import { Skeleton } from '@rneui/themed';
+
 
 
 const HomeScreen = ({ navigation }) => {
   const [feed, setField] = useState(0)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const { user, setUser, Id } = useContext(GlobalContext)
   // console.log(`${baseUrl}\\${user?.display_pic}`)
 
@@ -29,34 +31,33 @@ const HomeScreen = ({ navigation }) => {
     // console.log("user", typeof(user))
     
   console.log("id on home", Id)
-  // console.log(Id)
-  // console.log("user", user)
-  // console.log("no user")
-   
-
+  
   useEffect(() => {
-    const saa = async() => {
-      if(user.length === 0){
-      setLoading(true)
-      fetch(`${baseUrl}/user/${Id}`, {
-        method: 'GET',
-        headers: new Headers({
-          "Content-Type": "application/json"
-        }),
-      })
-      .then(res => res.json())
-      .then(resp => {
-        setLoading(false)
-        setUser(resp)
-        console.log("resp", resp)
-      })
-      .catch(err => {
-        console.log(err)
-        return alert("Something wen wrong")
-      })
-  }
-}
-    saa()
+    if(loading){
+      setField(20)
+    }
+//     const saa = async() => {
+//       if(user.length === 0){
+//       setLoading(true)
+//       fetch(`${baseUrl}/user/${Id}`, {
+//         method: 'GET',
+//         headers: new Headers({
+//           "Content-Type": "application/json"
+//         }),
+//       })
+//       .then(res => res.json())
+//       .then(resp => {
+//         setLoading(false)
+//         setUser(resp)
+//         console.log("resp", resp)
+//       })
+//       .catch(err => {
+//         console.log(err)
+//         return alert("Something wen wrong")
+//       })
+//   }
+// }
+//     saa()
   }, [navigation])
 
 
@@ -70,13 +71,13 @@ const HomeScreen = ({ navigation }) => {
           <View className="flex-1"><Text className="text-3xl font-bold text-slate-700">SamaNet</Text></View>
           <View className="flex flex-row space-x-2">
 
-            <TouchableOpacity onPress={() => navigation.navigate('Search')} className="bg-gray-100 p-2 rounded-full">
+            <TouchableOpacity onPress={() => navigation.navigate('Search')} disabled={loading} className="bg-gray-100 p-2 rounded-full">
             <Entypo name="magnifying-glass" size={24} color="rgb(51, 65, 85)" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('Profile')} className="bg-gray-100 p-2 rounded-full">
+            <TouchableOpacity onPress={() => navigation.navigate('Profile')} disabled={loading} className="bg-gray-100 p-2 rounded-full">
               <Ionicons name="person" size={24} color="rgb(51, 65, 85)" />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.navigate('ChatList')} className="bg-gray-100 p-2 rounded-full">
+            <TouchableOpacity onPress={() => navigation.navigate('ChatList')} disabled={loading} className="bg-gray-100 p-2 rounded-full">
               <Ionicons name="chatbubble-ellipses-sharp" size={24} color="rgb(51, 65, 85)" />  
             </TouchableOpacity>  
 
@@ -84,10 +85,53 @@ const HomeScreen = ({ navigation }) => {
         </View>
       <ScrollView className="h-full" showsVerticalScrollIndicator={false}>
       <View className="mt-5">
+        {!loading ? (
         <Text className="text-slate-700 font-semibold text-lg">Stories</Text>
+        ): (
+          <Skeleton style={{marginLeft: 4}} animation="pulse" width={110} height={25} />
+        )}
       </View>
       <ScrollView horizontal={true} className={`mt-3  space-x-2 p-1`} showsHorizontalScrollIndicator={false} contentContainerStyle={{paddingRight:20}}>
-        
+
+    {loading? (
+      <>
+      <View className=" h-44 w-32 shadow-md  rounded-md">
+        <Skeleton width={128} height={176} animation="wave" style={{borderRadius: 3}} />
+          <View className="self-center absolute left-2 top-4 rounded-full h-12 w-12 items-center justify-center bg-gray-100">
+            <Skeleton circle width={45} height={45} />
+          </View>
+          <View className="items-center absolute bottom-3 right-0 left-0">
+            <Skeleton animation="pulse" width={100} height={25} style={{borderRadius: 3}} />
+          </View>
+      </View>
+
+      <View className=" h-44 w-32 shadow-md  rounded-lg">
+      <Skeleton width={128} height={176} animation="wave" style={{borderRadius: 3}} className="rounded-lg" />
+        <View className="self-center absolute left-2 top-4 rounded-full h-12 w-12 items-center justify-center bg-gray-100">
+          <Skeleton circle width={45} height={45} />
+        </View>
+        <View className="items-center absolute bottom-3 right-0 left-0">
+          <Skeleton animation="pulse" width={100} style={{borderRadius: 3}} height={25} />
+        </View>
+      </View>
+
+      <View className=" h-44 w-32 shadow-md  rounded-lg">
+        <Skeleton width={128} height={176} animation="wave" style={{borderRadius: 3}} className="rounded-lg" />
+          <View className="self-center absolute left-2 top-4 rounded-full h-12 w-12 items-center justify-center bg-gray-100">
+            <Skeleton circle width={45} height={45} />
+          </View>
+          <View className="items-center absolute bottom-3 right-0 left-0">
+            <Skeleton animation="pulse" width={100} style={{borderRadius: 3}} height={25} />
+          </View>
+      </View>
+    </>
+
+
+
+
+
+    ): (
+      <>
         <TouchableOpacity className=" h-44 w-32 shadow-md  bg-gray-300 rounded-lg">
           <Image 
             source={Logo}
@@ -151,12 +195,17 @@ const HomeScreen = ({ navigation }) => {
             <Text className="text-md font-bold text-white mt-3">@Username</Text>
           </View>
         </TouchableOpacity>
+      </>
+    )}
 
       </ScrollView>
+      {!loading &&
       <TouchableOpacity className="bg-gray-200  items-center justify-center w-10 h-10 self-center mt-2 rounded-full" onPress={() => navigation.navigate('Create')}>
             <Entypo name="plus" size={28}  color="rgb(51, 65, 85)" />
       </TouchableOpacity>
+      }
 
+      {!loading ? (
       <View className="flex flex-row h-14 w-full mt-2 rounded-full bg-gray-200 mb-2">
         <Pressable onPress={() => setField(0)} className={`rounded-full h-full w-1/2  items-center justify-center ${feed === 0 &&  'bg-[#eeca70]'}`}>
           <Text className={`text-lg font-bold text-slate-700 ${feed === 0 &&  'text-white'}`}>Explore</Text>
@@ -165,6 +214,29 @@ const HomeScreen = ({ navigation }) => {
           <Text className={`text-lg font-bold text-slate-700 ${feed === 1 &&  'text-white'}`}>Discover</Text>
         </Pressable>
       </View>
+      ): (
+        <View className="w-full mt-10 mb-10 px-1 items-center">
+          <Skeleton style={{marginLeft: 4, borderRadius: 3}} animation="wave"  height={70} />
+        </View>
+      )}
+
+      {loading &&
+      <>
+        <View className="w-full mt-3 mb-10 px-1 items-center">
+          <Skeleton style={{marginLeft: 4, borderRadius: 3}} animation="wave"  height={300} />
+          <View className="self-center absolute left-4 top-4 rounded-full h-12 w-12 items-center justify-center bg-gray-100">
+            <Skeleton circle width={45} height={45} />
+          </View>
+          <View className="self-center absolute left-20 top-4  h-12 w-32 items-center justify-center">
+            <Skeleton style={{marginLeft: 4, borderRadius: 3}} animation="pulse"  height={20} />
+          </View>
+          <View className="self-center absolute left-20 top-20   w-48 items-center justify-center">
+            <Skeleton style={{marginLeft: 4, borderRadius: 3}} animation="pulse"  height={40} />
+          </View>
+        </View>  
+      </>
+      }
+      
 
     {feed === 0 && (
       <> 
