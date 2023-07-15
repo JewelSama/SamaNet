@@ -1,13 +1,26 @@
 import {SafeAreaView, View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
 import { Entypo, MaterialIcons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons'
 import Logo from "../assets/logo.png"
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { useContext } from 'react'
+import { GlobalContext } from '../context'
 
 
 
 const SettingsScreen = ({navigation}) =>  {
+    const { setUser, setToken, setId, setLoggedIn } = useContext(GlobalContext)
 
-    const Logout = () => {
+    const Logout = async() => {
+        await AsyncStorage.removeItem(
+            'Token')
+        await AsyncStorage.removeItem(
+            'UserId');
 
+            setUser("") 
+            setToken("") 
+            setId("") 
+            setLoggedIn(false)
+            navigation.navigate("SignIn")
     }
 
   return (
