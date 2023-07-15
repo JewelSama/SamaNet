@@ -17,7 +17,7 @@ import { Skeleton } from '@rneui/themed';
 
 const HomeScreen = ({ navigation }) => {
   const [feed, setField] = useState(0)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const { user, setUser, Id } = useContext(GlobalContext)
   // console.log(`${baseUrl}\\${user?.display_pic}`)
 
@@ -28,39 +28,37 @@ const HomeScreen = ({ navigation }) => {
   // console.log(ProfilePic)
   // console.log(ProfilePic)
   
-    // console.log("user", typeof(user))
-    
-  console.log("id on home", Id)
   
   useEffect(() => {
     if(loading){
       setField(20)
     }
-//     const saa = async() => {
-//       if(user.length === 0){
-//       setLoading(true)
-//       fetch(`${baseUrl}/user/${Id}`, {
-//         method: 'GET',
-//         headers: new Headers({
-//           "Content-Type": "application/json"
-//         }),
-//       })
-//       .then(res => res.json())
-//       .then(resp => {
-//         setLoading(false)
-//         setUser(resp)
-//         console.log("resp", resp)
-//       })
-//       .catch(err => {
-//         console.log(err)
-//         return alert("Something wen wrong")
-//       })
-//   }
-// }
-//     saa()
+    const saa = async() => {
+      if(user.length === 0){
+      setLoading(true)
+      fetch(`${baseUrl}/user/${Id}`, {
+        method: 'GET',
+        headers: new Headers({
+          "Content-Type": "application/json"
+        }),
+      })
+      .then(res => res.json())
+      .then(resp => {
+        setLoading(false)
+        setUser(resp)
+        console.log("resp", resp)
+      })
+      .catch(err => {
+        console.log(err)
+        setLoading(false)
+        return alert("Something wen wrong")
+      })
+  }
+}
+    saa()
   }, [navigation])
 
-
+console.log(loading)
 
 
 
@@ -95,7 +93,7 @@ const HomeScreen = ({ navigation }) => {
 
     {loading? (
       <>
-      <View className=" h-44 w-32 shadow-md  rounded-md">
+      <View className=" h-44 w-32   rounded-md">
         <Skeleton width={128} height={176} animation="wave" style={{borderRadius: 3}} />
           <View className="self-center absolute left-2 top-4 rounded-full h-12 w-12 items-center justify-center bg-gray-100">
             <Skeleton circle width={45} height={45} />
@@ -105,7 +103,7 @@ const HomeScreen = ({ navigation }) => {
           </View>
       </View>
 
-      <View className=" h-44 w-32 shadow-md  rounded-lg">
+      <View className=" h-44 w-32 rounded-lg">
       <Skeleton width={128} height={176} animation="wave" style={{borderRadius: 3}} className="rounded-lg" />
         <View className="self-center absolute left-2 top-4 rounded-full h-12 w-12 items-center justify-center bg-gray-100">
           <Skeleton circle width={45} height={45} />
@@ -115,7 +113,7 @@ const HomeScreen = ({ navigation }) => {
         </View>
       </View>
 
-      <View className=" h-44 w-32 shadow-md  rounded-lg">
+      <View className=" h-44 w-32  rounded-lg">
         <Skeleton width={128} height={176} animation="wave" style={{borderRadius: 3}} className="rounded-lg" />
           <View className="self-center absolute left-2 top-4 rounded-full h-12 w-12 items-center justify-center bg-gray-100">
             <Skeleton circle width={45} height={45} />
