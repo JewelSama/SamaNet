@@ -4,12 +4,14 @@ import GlobalStyles from '../Config/GlobalStyles'
 import Logo from "../assets/logo.png"
 import { GlobalContext } from '../context'
 import { baseUrl } from '../utils/endPoints'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
 
 const SignInScreen = ({ navigation }) => {
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const { setUser, user } = useContext(GlobalContext)
+  const { setUser, user, setToken, setLoggedIn, setId } = useContext(GlobalContext)
 
   
 
@@ -17,6 +19,7 @@ const SignInScreen = ({ navigation }) => {
     email: email.toLowerCase().trim(),
     password: password.trim()
   }
+  
 
 
   const Login = () => {
@@ -36,10 +39,22 @@ const SignInScreen = ({ navigation }) => {
     .then(res => res.json())
     .then(resp => {
       setLoading(false)
+      // console.log(resp)
+      
+        
+          AsyncStorage.setItem(
+            'Token',
+            resp?.authToken,
+          )
+          AsyncStorage.setItem(
+            'UserId', resp?.id.toString());
+            setId(resp?.id)
+        
+      setUser(resp)
       if(resp?.error){
         return alert(resp?.error)
       }
-      setUser(resp)
+      setLoggedIn(true)
       navigation.navigate("Home")
     })
     .catch(err =>{
@@ -48,6 +63,8 @@ const SignInScreen = ({ navigation }) => {
       console.log(err.message)
     })
   }
+
+  
 
 
   return (
