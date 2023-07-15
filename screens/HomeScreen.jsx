@@ -10,11 +10,13 @@ import Post4 from "../assets/post4.jpeg"
 import Post from '../components/Post'
 import { GlobalContext } from '../context'
 import { baseUrl } from '../utils/endPoints'
+import { useEffect } from 'react'
 
 
 const HomeScreen = ({ navigation }) => {
   const [feed, setField] = useState(0)
-  const { user } = useContext(GlobalContext)
+  const [loading, setLoading] = useState(false)
+  const { user, setUser, Id } = useContext(GlobalContext)
   // console.log(`${baseUrl}\\${user?.display_pic}`)
 
   const ProfilePic_test = `${baseUrl}\\${user?.display_pic}`
@@ -23,6 +25,43 @@ const HomeScreen = ({ navigation }) => {
   ProfilePic = ProfilePic.replace("public/", "")
   // console.log(ProfilePic)
   // console.log(ProfilePic)
+  
+    // console.log("user", typeof(user))
+    
+  console.log("id on home", Id)
+  // console.log(Id)
+  // console.log("user", user)
+  // console.log("no user")
+   
+
+  useEffect(() => {
+    const saa = async() => {
+      if(user.length === 0){
+      setLoading(true)
+      fetch(`${baseUrl}/user/${Id}`, {
+        method: 'GET',
+        headers: new Headers({
+          "Content-Type": "application/json"
+        }),
+      })
+      .then(res => res.json())
+      .then(resp => {
+        setLoading(false)
+        setUser(resp)
+        console.log("resp", resp)
+      })
+      .catch(err => {
+        console.log(err)
+        return alert("Something wen wrong")
+      })
+  }
+}
+    saa()
+  }, [navigation])
+
+
+
+
 
   return (
     <SafeAreaView style={GlobalStyles.droidSafeArea} className="h-full bg-white">
