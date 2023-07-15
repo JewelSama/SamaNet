@@ -1,5 +1,6 @@
 import { TransitionPresets, createStackNavigator } from "@react-navigation/stack" 
 import { Platform } from "react-native"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 import HomeScreen from "./screens/HomeScreen"
 import SignInScreen from "./screens/SignInScreen"
 import SignUpScreen from "./screens/SignUpScreen"
@@ -13,8 +14,66 @@ import EditProfileScreen from "./screens/EditProfileScreen"
 import CreatePostScreen from "./screens/CreatePostScreen"
 import ImgScreen from "./screens/ImgScreen"
 import ChatScreen from "./screens/ChatScreen"
+import { useContext, useEffect, useState } from "react"
+import { GlobalContext } from "./context"
+
+
+
 
 const StackNavigator = () => {
+  const [ firstTime, setFirstTime ] = useState(true)
+
+  const {setLoggedIn, loggedIn, setToken, setId} = useContext(GlobalContext)
+
+
+
+  useEffect(() => {
+    const isFirstTime = async () => {
+      try {
+        const result = await AsyncStorage.getItem('first-time')
+        if(result === null){
+          setFirstTime(true)
+          await AsyncStorage.setItem('first-time', "myFirstTime");
+        } 
+        if(result !== null){
+          setFirstTime(false)
+        }
+        // console.log(result)
+        // console.log(firstTime)
+      } catch (e) {
+        // saving error
+        console.log(e)
+      }
+    };
+    isFirstTime()
+
+  }, [])
+
+  useEffect(() => {
+    const saa = async () => { 
+      value = await AsyncStorage.getItem('Token')
+      setToken(value)
+      setLoggedIn(true)
+      // console.log(value)
+      
+    }
+    const jaa = async () => {
+      value = await AsyncStorage.getItem('UserId')
+      setId(value)
+      setLoggedIn(true)
+      // console.log("onValScr", value)
+    }
+    jaa()
+    saa()
+  }, [])
+
+  
+
+
+
+
+
+
     const Stack = createStackNavigator()
     const transi = () => {
       if(Platform.OS === 'android'){
@@ -27,10 +86,17 @@ const StackNavigator = () => {
     <Stack.Navigator screenOptions={{
       headerShown: false
     }}>
+      {firstTime &&
         <Stack.Screen name="Welcome" component={Welcome} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="Validate" component={ValidateScreen} />
-        <Stack.Screen name="SignIn" component={SignInScreen} />
+      }
+      {!loggedIn ? (
+         <> 
+          <Stack.Screen name="SignUp" component={SignUpScreen} />
+          <Stack.Screen name="Validate" component={ValidateScreen} />
+          <Stack.Screen name="SignIn" component={SignInScreen} />
+         </> 
+       ) : ( 
+         <> 
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="ChatList" component={ChatListScreen} />
         <Stack.Screen name="ChatScreen" component={ChatScreen} options={
@@ -56,6 +122,8 @@ const StackNavigator = () => {
           transi()
           
         } />
+         </> 
+       )} 
 
         
 
