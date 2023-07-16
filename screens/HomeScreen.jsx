@@ -30,9 +30,6 @@ const HomeScreen = ({ navigation }) => {
   
   
   useEffect(() => {
-    if(loading){
-      setField(20)
-    }
     const saa = async() => {
       if(user.length === 0){
       setLoading(true)
@@ -236,12 +233,12 @@ console.log(loading)
       }
       
 
-    {feed === 0 && (
+    {!loading ? ( feed === 0 ? (
       <> 
         <Post />
         <Post />        
       </>
-    )}
+    ) : "") : ""}
      
     
   {feed === 1 && (
