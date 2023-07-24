@@ -44,6 +44,7 @@ const ValidateScreen = ({ navigation, route }) => {
         setUser(resp)
         setId(resp?.id)
         setLoggedIn(true)
+        setToken(resp?.authToken)
 
         AsyncStorage.setItem(
           'Token',
