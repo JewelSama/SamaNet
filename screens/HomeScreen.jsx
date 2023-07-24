@@ -12,13 +12,16 @@ import { GlobalContext } from '../context'
 import { baseUrl } from '../utils/endPoints'
 import { useEffect } from 'react'
 import { Skeleton } from '@rneui/themed';
+import AsyncStorage from "@react-native-async-storage/async-storage"
+
 
 
 
 const HomeScreen = ({ navigation }) => {
   const [feed, setField] = useState(0)
   const [loading, setLoading] = useState(false)
-  const { user, setUser, Id } = useContext(GlobalContext)
+  const [feedPost, setFeedPost] = useState([])
+  const { user, setUser, setPosts, Id, posts } = useContext(GlobalContext)
   // console.log(`${baseUrl}\\${user?.display_pic}`)
 
   const ProfilePic_test = `${baseUrl}\\${user?.display_pic}`
@@ -28,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
   // console.log(ProfilePic)
   // console.log(ProfilePic)
   
-  
+  // console.log(Id)
   useEffect(() => {
     const saa = async() => {
       if(user.length === 0){
@@ -41,21 +44,50 @@ const HomeScreen = ({ navigation }) => {
       })
       .then(res => res.json())
       .then(resp => {
-        setLoading(false)
+        // setLoading(false)
         setUser(resp)
-        console.log("resp", resp)
+        // console.log("resp", resp)
       })
       .catch(err => {
         console.log(err)
         setLoading(false)
         return alert("Something wen wrong")
       })
+
+      // const getPosts = async() => {
+        // setLoading(true)
+        value = await AsyncStorage.getItem('Token')
+        // console.log("value, ", value)
+        // console.log(baseUrl)
+        await fetch(`${baseUrl}/post`, {
+          method: "GET",
+          headers: new Headers({
+            'Accept': 'application/json',
+            'Authorization': `Bearer ${value}`
+          })
+  
+        })
+          .then(res => res.json())
+          .then(resp => {
+            setLoading(false)
+            console.log(resp)
+            // setFeedPost(resp)
+            setPosts(resp)
+            
+          })
+          .catch(err => {
+            setLoading(false)
+            console.log("err", err)
+            alert("Something went wrong.")
+          })
   }
-}
+  }
+
+
+
     saa()
   }, [navigation])
-
-console.log(loading)
+  // console.log(feedPost)
 
 
 
@@ -234,9 +266,12 @@ console.log(loading)
       
 
     {!loading ? ( feed === 0 ? (
-      <> 
-        <Post />
-        <Post />        
+      <>
+        {posts.map((post, index) => (
+          // <Post key={post?.id} caption={post?.caption} img={post?.img_path} />
+          <Post key={index} post={post} />
+          // <Text>{post?.id}</Text>
+        ))} 
       </>
     ) : "") : ""}
      
