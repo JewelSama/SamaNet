@@ -1,20 +1,43 @@
 import { View, Text, TouchableOpacity, Image } from 'react-native'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Ionicons, Entypo, AntDesign, FontAwesome5 } from "@expo/vector-icons"
 import Pfp from "../assets/avatar3.jpg"
 import Post1 from "../assets/post4.jpeg"
 import { useNavigation } from '@react-navigation/native'
+import { baseUrl } from '../utils/endPoints'
 
 
-const Post = () => {
+const Post = ({ post }) => {
     const navigation = useNavigation()
     const [like, setLike] = useState(false)
-    const caption = "nisi quae ducimus unde aliquam, labore, dolorum modi architecto. Ullam blanditiis porro perspiciatis itaque quos, repellendus culpa?"
+    
+    let feedImg
+    if(post?.img_path === null){
+      feedImg = ""
+    }else {
+      let postImg = `${baseUrl}\\${post?.img_path}`
+      postImg = postImg?.replace("public\\", "")
+      postImg = postImg?.replaceAll("\\", "/")
+      postImg = postImg?.replace("public/", "")
+      feedImg = postImg
+    }
+    //Profile Pic
+    let profileImg
+    if(post?.user?.display_pic === null){
+      profileImg = ""
+    }else {
+      let postImg1 = `${baseUrl}\\${post?.user?.display_pic}`
+      postImg1 = postImg1?.replace("public\\", "")
+      postImg1 = postImg1?.replaceAll("\\", "/")
+      postImg1 = postImg1?.replace("public/", "")
+      profileImg = postImg1
+    }
+  
 
     const Like = () => {
         setLike(!like)
     }
-
+// console.log("pooosssttt", feedImg)
 
 
 
@@ -24,12 +47,12 @@ const Post = () => {
             <View className="flex flex-row flex-1 space-x-2">
               <TouchableOpacity>
                 <Image
-                  source={Pfp} 
+                  source={{uri: profileImg}} 
                   className="h-10 w-10 rounded-full"
                 />
               </TouchableOpacity>
               <View className="space-y-1">
-                <TouchableOpacity><Text className="font-semibold text-gray-800">Username</Text></TouchableOpacity>
+                <TouchableOpacity><Text className="font-semibold text-gray-800 text-md">{post?.user?.username}</Text></TouchableOpacity>
                 <View className="flex flex-row items-center space-x-1">
                   <Text className="font-semibold text-gray-800">4d</Text>
                   <Ionicons name="earth" size={15} color="rgb(31, 41, 55)" />
@@ -40,16 +63,16 @@ const Post = () => {
               <Entypo name="dots-three-horizontal" size={24} color="rgb(31, 41, 55)" />
             </TouchableOpacity>
           </View>
-          {caption && (
+          {post?.caption && (
             <View>
-              <Text className="text-gray-700 font-semibold">{caption}</Text>
+              <Text className="text-gray-700 font-semibold">{post?.caption}</Text>
             </View>
           )}
-          {Pfp && (
-            <TouchableOpacity onPress={() => navigation.navigate('ImgScreen', {img: Post1})} className="justify-center items-center self-center h-64 w-64 mt-4">
+          {feedImg && (
+            <TouchableOpacity onPress={() => navigation.navigate('ImgScreen', {imgUri: feedImg})} className="justify-center items-center self-center h-64 w-64 mt-4">
                 <Image 
-                    source={Post1}
-                    className="h-full w-full"
+                    source={{ uri:  feedImg}}
+                    className="h-full w-full rounded-md"
                 />
             </TouchableOpacity>
           )}
