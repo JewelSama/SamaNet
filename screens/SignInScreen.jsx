@@ -49,7 +49,7 @@ const SignInScreen = ({ navigation }) => {
           AsyncStorage.setItem(
             'UserId', resp?.id.toString());
             setId(resp?.id)
-        
+      setToken(resp?.authToken)
       setUser(resp)
       if(resp?.error){
         return alert(resp?.error)
