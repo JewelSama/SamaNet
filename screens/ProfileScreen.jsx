@@ -1,10 +1,18 @@
 import { SafeAreaView, TouchableOpacity, View, Text, Image, ScrollView } from 'react-native'
-import { useLayoutEffect } from 'react'
-import { Entypo, Feather } from "@expo/vector-icons"
+import { useContext, useLayoutEffect } from 'react'
+import { Feather } from "@expo/vector-icons"
 import Pfp from "../assets/avatar3.jpg"
+import { GlobalContext } from '../context'
+import { baseUrl } from '../utils/endPoints'
 
 
 const ProfileScreen = ({ navigation }) => {
+  const { user } = useContext(GlobalContext)
+
+  const ProfilePic_test = `${baseUrl}\\${user?.display_pic}`
+  let ProfilePic = ProfilePic_test.replace("public\\", "")
+  ProfilePic = ProfilePic.replaceAll("\\", "/")
+  ProfilePic = ProfilePic.replace("public/", "")
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -27,11 +35,11 @@ const ProfileScreen = ({ navigation }) => {
     <SafeAreaView className="bg-white h-full">
       <View className="px-4">
         <View className="bg-gray-100 mt-6 h-48 w-full items-center justify-center">
-        <View className="items-center relative bg-slate-400 h-36 w-36 rounded-full self-center justify-center">
+        <View className="items-center relative bg-slate-400 h-32 w-32 rounded-full self-center justify-center">
           <TouchableOpacity>
           <Image 
-            source={Pfp}
-            className="h-32 w-32 rounded-full"
+            source={{uri: ProfilePic}}
+            className="h-28 w-28 rounded-full"
           />
           </TouchableOpacity>
           <TouchableOpacity className="absolute bottom-2 right-6">
