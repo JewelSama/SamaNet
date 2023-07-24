@@ -2,13 +2,20 @@ import { SafeAreaView, View, Text, TouchableOpacity, Image } from 'react-native'
 import { Entypo } from "@expo/vector-icons"
 
 const ImgScreen = ({ navigation, route }) => {
-    const { img } = route.params;
+    const { img, imgUri } = route.params;
   return (
     <View className="bg-white h-full relative">
-        <Image 
-            source={img}
+        {img && (<Image
+             
+            source={ img }
             className="h-full w-full"
-        />
+        /> )}
+
+        {imgUri && (<Image
+             
+            source={{ uri: imgUri }}
+            className="h-full w-full"
+        /> )}
 
         <View className="top-14 items-center  left-0 right-0  absolute">
             <Text className="text-xl font-bold text-gray-100">Jewel Sama</Text>
