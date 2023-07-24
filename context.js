@@ -9,7 +9,7 @@ const GlobalProvider = ({ children }) => {
     const [Id, setId] = useState("")
     const [emailToken, setEmailToken] = useState("")
     const [user, setUser] = useState([])
-    const [post, setPosts] = useState([])
+    const [posts, setPosts] = useState([])
 
 
     return(
@@ -17,7 +17,7 @@ const GlobalProvider = ({ children }) => {
             loggedIn,
             token,
             user,
-            post,
+            posts,
             emailToken,
             Id,
 
