@@ -46,7 +46,7 @@ const CreatePostScreen = ({ navigation }) => {
   })}
 
   if(caption){
-    formData.append('caption',caption)
+    formData.append('caption',caption.trim())
   }
   
 
@@ -115,6 +115,7 @@ const CreatePostScreen = ({ navigation }) => {
                   autoCapitalize='sentences'
                   value={caption}
                   onChangeText={setCaption}
+                  editable={!loading}
                 />
               </View>
 
