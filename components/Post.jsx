@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Image } from 'react-native'
+import { View, Text, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
 import { useState, useEffect } from 'react'
 import { Ionicons, Entypo, AntDesign, FontAwesome5 } from "@expo/vector-icons"
 import Pfp from "../assets/avatar3.jpg"
@@ -32,13 +32,33 @@ const Post = ({ post }) => {
       postImg1 = postImg1?.replace("public/", "")
       profileImg = postImg1
     }
+
+    //Profile PPic
+    let profilePImg = ""
+    if(!post?.display_pic){
+      profilePImg = ""
+    }else {
+      let postImg2 = `${baseUrl}\\${post?.display_pic}`
+      postImg2 = postImg2?.replace("public\\", "")
+      postImg2 = postImg2?.replaceAll("\\", "/")
+      postImg2 = postImg2?.replace("public/", "")
+      profilePImg = postImg2
+    }
   
 
     const Like = () => {
         setLike(!like)
     }
 // console.log("pooosssttt", feedImg)
-
+  let pusername = "" 
+  let pUsername = ""
+  if(!post?.username){
+     pusername = ""
+  } else {
+    pusername = post?.username
+     pUsername = pusername[0].toUpperCase() + pusername.slice(1)
+  } 
+    
 
 
   return (
@@ -46,13 +66,26 @@ const Post = ({ post }) => {
           <View className="flex flex-row mb-1">
             <View className="flex flex-row flex-1 space-x-2">
               <TouchableOpacity>
-                <Image
-                  source={{uri: profileImg}} 
-                  className="h-10 w-10 rounded-full"
-                />
+                {
+                  profilePImg ? (
+                    <Image
+                    source={{uri: profilePImg}} 
+                    className="h-10 w-10 rounded-full"
+                  />
+                  ) : (
+                  <Image
+                    source={{uri: profileImg}} 
+                    className="h-10 w-10 rounded-full"
+                  />
+                )} 
               </TouchableOpacity>
               <View className="space-y-1">
-                <TouchableOpacity><Text className="font-semibold text-gray-800 text-md">{post?.user?.username}</Text></TouchableOpacity>
+              {!pUsername
+                ? ( 
+                    <TouchableOpacity><Text className="font-semibold text-gray-800 text-md">{post?.user?.username}</Text></TouchableOpacity>
+                 ) : ( 
+                    <TouchableOpacity><Text className="font-semibold text-gray-800 text-md">{pUsername}</Text></TouchableOpacity> 
+                )}
                 <View className="flex flex-row items-center space-x-1">
                   <Text className="font-semibold text-gray-800">4d</Text>
                   <Ionicons name="earth" size={15} color="rgb(31, 41, 55)" />
@@ -70,10 +103,11 @@ const Post = ({ post }) => {
           )}
           {feedImg && (
             <TouchableOpacity onPress={() => navigation.navigate('ImgScreen', {imgUri: feedImg})} className="justify-center items-center self-center h-64 w-64 mt-4">
-                <Image 
+                  <Image 
                     source={{ uri:  feedImg}}
                     className="h-full w-full rounded-md"
                 />
+               
             </TouchableOpacity>
           )}
           <View className="flex flex-row border-b p-2  mt-4  border-gray-300">
