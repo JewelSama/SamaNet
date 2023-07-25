@@ -70,7 +70,7 @@ const HomeScreen = ({ navigation }) => {
           .then(res => res.json())
           .then(resp => {
             setLoading(false)
-            console.log(resp)
+            // console.log(resp)
             // setFeedPost(resp)
             setPosts(resp)
             
