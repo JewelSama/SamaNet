@@ -9,7 +9,8 @@ import {Picker} from '@react-native-picker/picker';
 const EditProfileScreen = ({ navigation }) => {
     const [showPhone, setshowPhone] = useState(false)
     const onToggleSwitch = () => setshowPhone(!showPhone)
-    const [state, setState] = useState();
+    const [state, setState] = useState('');
+    const [gender, setGender] = useState('');
 
 
     const Update = () => {
@@ -93,6 +94,18 @@ const EditProfileScreen = ({ navigation }) => {
             </View>
           </View>
         <View>
+
+        <View className="mt-6">
+            <Text className="text-xl font-semibold">Your Gender🙄</Text>
+            <Picker
+              selectedValue={gender}
+              onValueChange={(itemValue, itemIndex) =>
+                setGender(itemValue)
+              }>
+                <Picker.Item label="Male" value="M" />
+                <Picker.Item label="Female" value="F" />
+            </Picker>
+          </View>
 
         <View className="mt-6">
             <Text className="text-xl font-semibold">Select your State</Text>
