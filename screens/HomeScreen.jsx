@@ -20,7 +20,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage"
 const HomeScreen = ({ navigation }) => {
   const [feed, setField] = useState(0)
   const [loading, setLoading] = useState(false)
-  const [feedPost, setFeedPost] = useState([])
+  // const [feedPost, setFeedPost] = useState([])
   const { user, setUser, setPosts, Id, posts } = useContext(GlobalContext)
   // console.log(`${baseUrl}\\${user?.display_pic}`)
 
