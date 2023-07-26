@@ -1,15 +1,30 @@
 import { View, Text, TouchableOpacity, Image, ActivityIndicator } from 'react-native'
-import { useState, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { Ionicons, Entypo, AntDesign, FontAwesome5 } from "@expo/vector-icons"
-import Pfp from "../assets/avatar3.jpg"
-import Post1 from "../assets/post4.jpeg"
 import { useNavigation } from '@react-navigation/native'
 import { baseUrl } from '../utils/endPoints'
+import { Audio } from 'expo-av';
 
 
 const Post = ({ post }) => {
     const navigation = useNavigation()
     const [like, setLike] = useState(false)
+    const [imgLoading, setImgLoading] = useState(true)
+    const [pfpLoading, setPfpLoading] = useState(true)
+    const [sound, setSound] = useState()
+
+
+
+    const onLoad = useCallback(() => {
+      setImgLoading((state) => !state)
+    })
+
+    const onPfpLoad = useCallback(() => {
+      setPfpLoading((state) => !state)
+    })
+
+
+
     
     let feedImg
     if(post?.img_path === null){
@@ -46,7 +61,18 @@ const Post = ({ post }) => {
     }
   
 
+    async function playSound() {
+      // console.log('Loading Sound');
+      const { sound } = await Audio.Sound.createAsync( require('../assets/Like.mp3')
+      );
+      setSound(sound);
+  
+      // console.log('Playing Sound');
+      await sound.playAsync();
+    }
+
     const Like = () => {
+        playSound()
         setLike(!like)
     }
 // console.log("pooosssttt", feedImg)
@@ -71,14 +97,20 @@ const Post = ({ post }) => {
                     <Image
                     source={{uri: profilePImg}} 
                     className="h-10 w-10 rounded-full"
+                    onLoad={onPfpLoad}
                   />
                   ) : (
                   <Image
                     source={{uri: profileImg}} 
                     className="h-10 w-10 rounded-full"
+                    onLoad={onPfpLoad}
                   />
                 )} 
               </TouchableOpacity>
+              {pfpLoading && (
+                    <ActivityIndicator color="#eeca70" size="small" className="absolute self-center top-0 bottom-0" />
+                )
+              }
               <View className="space-y-1">
               {!pUsername
                 ? ( 
@@ -102,13 +134,19 @@ const Post = ({ post }) => {
             </View>
           )}
           {feedImg && (
-            <TouchableOpacity onPress={() => navigation.navigate('ImgScreen', {imgUri: feedImg})} className="justify-center items-center self-center h-80 w-80 mt-4">
-                  <Image 
-                    source={{ uri:  feedImg}}
-                    className="h-full w-full rounded-md"
-                />
-               
-            </TouchableOpacity>
+            <>
+              <TouchableOpacity onPress={() => navigation.navigate('ImgScreen', {imgUri: feedImg, username: post?.username})} className="justify-center items-center self-center h-80 w-80 mt-4">
+                    <Image 
+                      source={{ uri:  feedImg}}
+                      className="h-full w-full rounded-md"
+                      onLoad={onLoad}
+                  />
+
+              </TouchableOpacity>
+              {imgLoading && (
+                <ActivityIndicator color="#eeca70" size="large" className="absolute self-center top-0 bottom-0" />
+              )}
+            </>
           )}
           <View className="flex flex-row border-b p-2  mt-4  border-gray-300">
             <TouchableOpacity className="flex flex-1 flex-row space-x-1 items-center">
