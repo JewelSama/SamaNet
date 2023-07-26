@@ -1,14 +1,22 @@
 import { SafeAreaView, TouchableOpacity, View, Text, Image, ScrollView } from 'react-native'
-import { useContext, useLayoutEffect } from 'react'
+import { useCallback, useContext, useLayoutEffect, useState } from 'react'
 import { Feather } from "@expo/vector-icons"
 import Pfp from "../assets/avatar3.jpg"
 import { GlobalContext } from '../context'
 import { baseUrl } from '../utils/endPoints'
 import Post from '../components/Post'
+import { ActivityIndicator } from 'react-native'
 
 
 const ProfileScreen = ({ navigation }) => {
   const { user, posts } = useContext(GlobalContext)
+  const [pfpLoading, setPfpLoading] = useState(true)
+
+  
+  const onPfpLoad = useCallback(() => {
+    setPfpLoading((state) => !state)
+  })
+
 
   const ProfilePic_test = `${baseUrl}\\${user?.display_pic}`
   let ProfilePic = ProfilePic_test.replace("public\\", "")
@@ -40,7 +48,7 @@ const ProfileScreen = ({ navigation }) => {
         myPosts.push(p)
       }
     })
-    console.log("p", myPosts)
+    // console.log("p", myPosts)
 
 
 
@@ -55,12 +63,17 @@ const ProfileScreen = ({ navigation }) => {
           <>
           <View className="px-2">
             <View className="bg-gray-100  rounded-md mt-6 h-48 w-full items-center justify-center">
-        <View className="items-center relative bg-slate-400 h-32 w-32 rounded-full self-center justify-center">
-          <TouchableOpacity>
+        <View className="items-center relative bg-gray-300 h-32 w-32 rounded-full self-center justify-center">
+          <TouchableOpacity onPress={() => navigation.navigate('ImgScreen', {imgUri: ProfilePic})}>
           <Image 
             source={{uri: ProfilePic}}
             className="h-28 w-28 rounded-full"
+            onLoad={onPfpLoad}
           />
+          {pfpLoading && (
+                    <ActivityIndicator color="white" size="large" className="absolute self-center top-0 bottom-0" />
+                )
+          }
           </TouchableOpacity>
           <TouchableOpacity className="absolute bottom-2 right-6">
             <Feather name='edit' size={28} color="rgb(51, 65, 85)" />
@@ -76,7 +89,7 @@ const ProfileScreen = ({ navigation }) => {
           </View>
         {/* <ScrollView className="h-full"> */}
         
-        <Text className="text-gray-700 text-xl mb-2 text-center font-bold">{user?.username}'s Posts</Text>
+        {myPosts.length >= 1 && ( <Text className="text-gray-700 text-xl mb-2 text-center font-bold">{user?.username}'s Posts</Text> )}
           {myPosts.length < 1 ? (
 
             <View className="items-center justify-center mt-40">
