@@ -102,7 +102,7 @@ const Post = ({ post }) => {
             </View>
           )}
           {feedImg && (
-            <TouchableOpacity onPress={() => navigation.navigate('ImgScreen', {imgUri: feedImg})} className="justify-center items-center self-center h-64 w-64 mt-4">
+            <TouchableOpacity onPress={() => navigation.navigate('ImgScreen', {imgUri: feedImg})} className="justify-center items-center self-center h-80 w-80 mt-4">
                   <Image 
                     source={{ uri:  feedImg}}
                     className="h-full w-full rounded-md"
